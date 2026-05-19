@@ -14,10 +14,13 @@ app.use(cors());
 app.use(express.json());
 
 const pool = mysql.createPool({
-  host: 'localhost', port: 3306,
-  user: 'root', password: '',
-  database: 'bd_referencias_ico',
-  waitForConnections: true, connectionLimit: 10,
+  host: process.env.MYSQL_HOST || 'localhost',
+  port: process.env.MYSQL_PORT || 3306,
+  user: process.env.MYSQL_USER || 'root',
+  password: process.env.MYSQL_PASSWORD || '',
+  database: process.env.MYSQL_DATABASE || 'bd_referencias_ico',
+  waitForConnections: true,
+  connectionLimit: 10,
 });
 
 pool.getConnection()
